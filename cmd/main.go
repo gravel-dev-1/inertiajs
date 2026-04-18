@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"log"
-	"os"
 	"os/signal"
+	"syscall"
 
 	"gbfw/internal/http/routes"
 	"gbfw/internal/services/env"
@@ -30,7 +30,7 @@ func main() {
 	app.Use(logger.New())
 	routes.Routes(app)
 
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGTERM)
 	defer stop()
 
 	go func() {
