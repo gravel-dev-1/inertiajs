@@ -14,15 +14,4 @@ func init() {
 	cmd.Start()
 }
 
-var FS fs.FS = &filesystems{[]fs.FS{os.DirFS("internal/vite/dev"), os.DirFS("public")}}
-
-type filesystems struct{ filesystems []fs.FS }
-
-func (f filesystems) Open(name string) (file fs.File, err error) {
-	for _, filesystem := range f.filesystems {
-		if file, err = filesystem.Open(name); file != nil {
-			return file, err
-		}
-	}
-	return nil, fs.ErrNotExist
-}
+var FS fs.FS = os.DirFS("public")
