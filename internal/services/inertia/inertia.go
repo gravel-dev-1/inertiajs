@@ -34,6 +34,21 @@ type ManifestEntry struct {
 	CSS     []string `json:"css"`
 }
 
+func (t inertia) ReactRefresh() template.HTML {
+	if !env.IsDev() {
+		return ""
+	}
+
+	return template.HTML(`
+	<script type="module">
+		import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+		RefreshRuntime.injectIntoGlobalHook(window)
+		window.$RefreshReg$ = () => {}
+		window.$RefreshSig$ = () => (type) => type
+		window.__vite_plugin_react_preamble_installed__ = true
+	</script>`)
+}
+
 func (t inertia) Vite(entrypoints ...string) template.HTML {
 	builder := new(strings.Builder)
 	if env.IsDev() {
