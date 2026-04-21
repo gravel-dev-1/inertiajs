@@ -1,5 +1,6 @@
 import path from "path";
 import { defineConfig, loadEnv } from "vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, import.meta.dirname);
@@ -21,5 +22,6 @@ export default defineConfig(({ mode }) => {
       origin: `http://localhost:${port}`,
       proxy: { "/api": { target: env.VITE_API_URL, changeOrigin: true } },
     },
+    plugins: [svelte()],
   };
 });
