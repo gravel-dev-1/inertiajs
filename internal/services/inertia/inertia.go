@@ -82,9 +82,9 @@ func (t inertia) Vite(entrypoints ...string) template.HTML {
 		}
 	}
 
-	// for _, entry := range append(entrypoints, fmt.Sprintf("resources/js/%s.ts", t.Page)) {
-	// 	generate(entry, builder)
-	// }
+	for _, entry := range entrypoints {
+		generate(entry, builder)
+	}
 
 	return template.HTML(builder.String())
 }
