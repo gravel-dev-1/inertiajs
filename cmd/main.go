@@ -34,7 +34,7 @@ func main() {
 	defer stop()
 
 	go func() {
-		if err := app.Listen(config.Env("LISTEN_ADDR"), fiber.ListenConfig{GracefulContext: ctx}); err != nil {
+		if err := app.Listen(env.Get("LISTEN_ADDR"), fiber.ListenConfig{GracefulContext: ctx}); err != nil {
 			log.Println(err)
 		}
 	}()
