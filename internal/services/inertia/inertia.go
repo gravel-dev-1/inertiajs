@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gravel/internal/services/env"
+	"gravel/internal/env"
 	"gravel/internal/services/vite"
 
 	"github.com/gofiber/fiber/v3"
